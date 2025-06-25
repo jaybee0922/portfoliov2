@@ -184,7 +184,7 @@ const App: React.FC = () => {
                                 Exploring the universe of web development and design
                             </p>
                             <div className="flex flex-col gap-6">
-                                <a href="https://drive.google.com/file/d/1k-F4v2UY_0vxjsUdrhD34eri9OlCE3Jp/view?usp=sharing" download>
+                                <a href="https://drive.google.com/file/d/1b9R0sXupTzllXS2cSwXhg0c-N9ac_4Xe/view?usp=sharing" download>
                                     <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 whitespace-nowrap !rounded-button cursor-pointer">
                                         <i className="fas fa-download mr-2"></i> Download CV
                                     </button>
