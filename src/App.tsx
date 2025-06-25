@@ -25,8 +25,9 @@ const App: React.FC = () => {
         const meteors: { x: number; y: number; length: number; speed: number; opacity: number }[] = [];
         let lastMeteorTime = 0;
 
-        // Create stars
-        for (let i = 0; i < 200; i++) {
+        // Adjust number of stars based on screen size for performance
+        const starCount = window.innerWidth < 640 ? 100 : 200; // Fewer stars on mobile
+        for (let i = 0; i < starCount; i++) {
             const radius = Math.random() * 1.5;
             stars.push({
                 x: Math.random() * canvas.width,
@@ -42,7 +43,7 @@ const App: React.FC = () => {
         const createMeteor = () => {
             const x = Math.random() * canvas.width;
             const y = 0;
-            const length = 100 + Math.random() * 150;
+            const length = window.innerWidth < 640 ? 50 + Math.random() * 100 : 100 + Math.random() * 150; // Smaller meteors on mobile
             const speed = 5 + Math.random() * 10;
             meteors.push({
                 x,
@@ -137,10 +138,10 @@ const App: React.FC = () => {
 
             {/* Navigation */}
             <header className="fixed top-0 left-0 w-full z-10 bg-black bg-opacity-50 backdrop-blur-sm">
-                <nav className="max-w-6xl mx-auto px-6 py-4">
-                    <div className="flex justify-between items-center">
-                        <div className="text-xl font-bold">...</div>
-                        <ul className="flex space-x-8">
+                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div className="flex flex-col sm:flex-row justify-between items-center">
+                        <div className="text-lg sm:text-xl font-bold mb-4 sm:mb-0">...</div>
+                        <ul className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 text-center">
                             {['home', 'projects', 'contact'].map((section) => (
                                 <li key={section}>
                                     <a
@@ -155,7 +156,7 @@ const App: React.FC = () => {
                                             }
                                         }}
                                         href={`#${section}`}
-                                        className={`cursor-pointer transition-all duration-300 hover:text-blue-300 ${activeSection === section ? 'text-blue-400' : ''}`}
+                                        className={`cursor-pointer transition-all duration-300 hover:text-blue-300 text-sm sm:text-base ${activeSection === section ? 'text-blue-400' : ''}`}
                                     >
                                         {section.charAt(0).toUpperCase() + section.slice(1)}
                                     </a>
@@ -170,40 +171,40 @@ const App: React.FC = () => {
                 {/* Home Section */}
                 <section
                     id="home"
-                    className="min-h-screen flex items-center px-4 pt-20"
+                    className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 pt-20"
                     style={{ transform: `translateY(${scrollY * 0.1}px)` }}
                 >
-                    <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
-                        <div className="flex flex-col items-start w-full md:w-1/2">
-                            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+                    <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12">
+                        <div className="flex flex-col items-start w-full lg:w-1/2">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 animate-fade-in">
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                                     Geoffrey Beenie P. Orpia
                                 </span>
                             </h1>
-                            <p className="text-xl md:text-2xl mb-10 text-gray-300">
+                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-10 text-gray-300">
                                 Exploring the universe of web development and design
                             </p>
                             <div className="flex flex-col gap-6">
                                 <a href="https://drive.google.com/file/d/1b9R0sXupTzllXS2cSwXhg0c-N9ac_4Xe/view?usp=sharing" download>
-                                    <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 whitespace-nowrap !rounded-button cursor-pointer">
+                                    <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 whitespace-nowrap !rounded-button cursor-pointer text-sm sm:text-base">
                                         <i className="fas fa-download mr-2"></i> Download CV
                                     </button>
                                 </a>
                                 <div className="flex gap-4">
-                                    <a href="https://www.facebook.com/geoffrey.beenie.p.orpia/" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-400 hover:text-blue-500 transition-colors duration-300">
+                                    <a href="https://www.facebook.com/geoffrey.beenie.p.orpia/" target="_blank" rel="noopener noreferrer" className="text-xl sm:text-2xl text-gray-400 hover:text-blue-500 transition-colors duration-300">
                                         <i className="fab fa-facebook"></i>
                                     </a>
-                                    <a href="mailto:g.orpia.126373.tc@umindanao.edu.ph?subject=Portfolio%20Contact&body=Hi%20Jaybee,%20I%20saw%20your%20portfolio..." className="text-2xl text-gray-400 hover:text-red-500 transition-colors duration-300">
+                                    <a href="mailto:g.orpia.126373.tc@umindanao.edu.ph?subject=Portfolio%20Contact&body=Hi%20Jaybee,%20I%20saw%20your%20portfolio..." className="text-xl sm:text-2xl text-gray-400 hover:text-red-500 transition-colors duration-300">
                                         <i className="fab fa-google"></i>
                                     </a>
-                                    <a href="https://github.com/tropangpotchiph86" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-400 hover:text-purple-500 transition-colors duration-300">
+                                    <a href="https://github.com/tropangpotchiph86" target="_blank" rel="noopener noreferrer" className="text-xl sm:text-2xl text-gray-400 hover:text-purple-500 transition-colors duration-300">
                                         <i className="fab fa-github"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full md:w-1/2 flex justify-center">
-                            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-500/30">
+                        <div className="w-full lg:w-1/2 flex justify-center">
+                            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-blue-500/30">
                                 <img
                                     src="https://i.ibb.co/vv6vzyy2/profile.jpg"
                                     alt="Developer Portrait"
@@ -212,9 +213,9 @@ const App: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <div className="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
                         <a href="#projects" className="text-gray-400 hover:text-white">
-                            <i className="fas fa-chevron-down text-2xl"></i>
+                            <i className="fas fa-chevron-down text-xl sm:text-2xl"></i>
                         </a>
                     </div>
                 </section>
@@ -222,14 +223,14 @@ const App: React.FC = () => {
                 {/* Projects Section */}
                 <section
                     id="projects"
-                    className="min-h-screen py-20 px-4"
+                    className="min-h-screen py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
                     style={{ transform: `translateY(${scrollY * 0.05}px)` }}
                 >
-                    <div className="max-w-6xl mx-auto w-full">
-                        <h2 className="text-4xl font-bold mb-16 text-center">
+                    <div className="max-w-7xl mx-auto w-full">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 sm:mb-16 text-center">
                             <span className="border-b-2 border-blue-500 pb-2">My Projects</span>
                         </h2>
-                        <div className="relative flex flex-col space-y-12 before:absolute before:inset-0 before:ml-12 before:w-0.5 before:bg-gray-700 max-w-5xl mx-auto">
+                        <div className="relative flex flex-col space-y-8 sm:space-y-12 before:absolute before:inset-0 before:ml-8 sm:before:ml-12 before:w-0.5 before:bg-gray-700 max-w-5xl mx-auto">
                             {[
                                 {
                                     id: 1,
@@ -283,12 +284,12 @@ const App: React.FC = () => {
                             ].map((project) => (
                                 <div
                                     key={project.id}
-                                    className="flex items-start gap-16 group relative ml-24"
+                                    className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8 md:gap-12 lg:gap-16 group relative sm:ml-12 md:ml-16 lg:ml-24"
                                 >
-                                    <div className="relative z-10 -ml-[2.75rem]">
-                                        <div className="absolute w-4 h-4 bg-blue-500 rounded-full left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 ml-[-2px]"></div>
+                                    <div className="relative z-10 -ml-[1.75rem] sm:-ml-[2.75rem]">
+                                        <div className="absolute w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 ml-[-2px]"></div>
                                     </div>
-                                    <div className="w-24 h-24 z-10">
+                                    <div className="w-20 h-20 sm:w-24 sm:h-24 z-10">
                                         <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-800 group-hover:border-blue-500 transition-all duration-300">
                                             <img
                                                 src={project.image}
@@ -297,11 +298,11 @@ const App: React.FC = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="flex-1 bg-gray-900 bg-opacity-40 p-6 rounded-lg hover:bg-opacity-60 transition-all duration-300">
-                                        <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                                    <div className="flex-1 bg-gray-900 bg-opacity-40 p-4 sm:p-6 rounded-lg hover:bg-opacity-60 transition-all duration-300">
+                                        <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
                                             {project.title}
                                         </h3>
-                                        <p className="text-gray-400 mb-4">{project.description}</p>
+                                        <p className="text-sm sm:text-base text-gray-400 mb-4">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.technologies.map((tech) => (
                                                 <span
@@ -327,7 +328,7 @@ const App: React.FC = () => {
                                                 }
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="mt-4 inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1"
+                                                className="mt-4 inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 sm:px-6 py-2 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 text-sm sm:text-base"
                                             >
                                                 View
                                             </a>
@@ -342,69 +343,84 @@ const App: React.FC = () => {
                 {/* Contact Section */}
                 <section
                     id="contact"
-                    className="min-h-screen py-20 px-4"
+                    className="min-h-screen py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
                     style={{ transform: `translateY(${scrollY * 0.02}px)` }}
                 >
                     <div className="max-w-4xl mx-auto w-full">
-                        <h2 className="text-4xl font-bold mb-16 text-center">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 sm:mb-16 text-center">
                             <span className="border-b-2 border-blue-500 pb-2">Get In Touch</span>
                         </h2>
-                        <div className="bg-gray-900 bg-opacity-70 rounded-lg p-8 shadow-lg">
+                        <div className="bg-gray-900 bg-opacity-70 rounded-lg p-6 sm:p-8 shadow-lg">
                             <form className="space-y-6">
                                 <div>
-                                    <label htmlFor="email" className="block text-gray-400 mb-2">Email</label>
+                                    <label htmlFor="email" className="block text-gray-400 mb-2 text-sm sm:text-base">Email</label>
                                     <input
                                         type="email"
                                         id="email"
-                                        className="w-full bg-gray-800 border-none rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none text-sm"
+                                        className="w-full bg-gray-800 border-none rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none text-sm sm:text-base"
                                         placeholder="your.email@example.com"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="message" className="block text-gray-400 mb-2">Message</label>
+                                    <label htmlFor="message" className="block text-gray-400 mb-2 text-sm sm:text-base">Message</label>
                                     <textarea
                                         id="message"
                                         rows={5}
-                                        className="w-full bg-gray-800 border-none rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none text-sm resize-none"
+                                        className="w-full bg-gray-800 border-none rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none text-sm sm:text-base resize-none"
                                         placeholder="Your message here..."
                                     ></textarea>
                                 </div>
                                 <button
                                     type="submit"
-                                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 whitespace-nowrap !rounded-button cursor-pointer"
+                                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 whitespace-nowrap !rounded-button cursor-pointer text-sm sm:text-base"
                                 >
                                     <i className="fas fa-paper-plane mr-2"></i> Send Message
                                 </button>
                             </form>
-                            {/* <div className="mt-12 flex flex-col md:flex-row justify-center items-center gap-8">
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center cursor-pointer">
-                  <i className="fab fa-github text-2xl mr-2"></i> GitHub
-                </a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center cursor-pointer">
-                  <i className="fab fa-linkedin text-2xl mr-2"></i> LinkedIn
-                </a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center cursor-pointer">
-                  <i className="fab fa-twitter text-2xl mr-2"></i> Twitter
-                </a>
-                <a href="mailto:contact@example.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center cursor-pointer">
-                  <i className="fas fa-envelope text-2xl mr-2"></i> Email
-                </a>
-              </div> */}
                         </div>
                     </div>
                 </section>
             </main>
 
             {/* Footer */}
-            <footer className="relative z-1 bg-gray-900 bg-opacity-70 py-8">
-                <div className="max-w-6xl mx-auto w-full px-4">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                        <div className="mb-4 md:mb-0">
-                            <p className="text-gray-400">© 2017 Geoffrey Dev.</p>
+            <footer className="relative z-1 bg-gray-900 bg-opacity-70 py-6 sm:py-8">
+                <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+                        <div className="mb-4 sm:mb-0">
+                            <p className="text-gray-400 text-sm sm:text-base">© 2017 Geoffrey Dev.</p>
                         </div>
                     </div>
                 </div>
             </footer>
+
+            {/* Custom CSS for responsive timeline and other minor adjustments */}
+            <style>{`
+                @media (max-width: 640px) {
+                    .before\\:ml-12 {
+                        margin-left: 2rem;
+                    }
+                    .before\\:ml-8 {
+                        margin-left: 1.5rem;
+                    }
+                    .sm\\:ml-12 {
+                        margin-left: 0;
+                    }
+                    .sm\\:-ml-\\[2\\.75rem\\] {
+                        margin-left: -1.25rem;
+                    }
+                    .sm\\:flex-row {
+                        flex-direction: column;
+                    }
+                    .sm\\:space-y-12 {
+                        space-y: 8;
+                    }
+                }
+                @media (min-width: 641px) and (max-width: 768px) {
+                    .before\\:ml-12 {
+                        margin-left: 2.5rem;
+                    }
+                }
+            `}</style>
         </div>
     );
 };
