@@ -272,7 +272,14 @@ const App: React.FC = () => {
                                     description: "In a Pokémon battle, trainers face off in a vibrant, strategic showdown, commanding their Pokémon to unleash a flurry of dynamic moves under a bright.",
                                     image: "https://web-battle.netlify.app/img/pikachu.jpg",
                                     technologies: ["Html", "Css", "Javascript"]
-                                }
+                                },
+                                {
+                                    id: 9,
+                                    title: "Cinezone v2",
+                                    description: "Real-time movie search platform with advanced filtering and recommendations.",
+                                    image: "https://cine-zone.netlify.app/images/showcase-bg.jpg",
+                                    technologies: ["React.js", "Tailwind css"]
+                                },
                             ].map((project) => (
                                 <div
                                     key={project.id}
@@ -305,7 +312,7 @@ const App: React.FC = () => {
                                                 </span>
                                             ))}
                                         </div>
-                                        {(project.id === 2 || project.id === 4 || project.id === 5 || project.id === 8) && (
+                                        {(project.id === 2 || project.id === 4 || project.id === 5 || project.id === 8 || project.id === 9) && (
                                             <a
                                                 href={
                                                     project.id === 2
@@ -314,7 +321,9 @@ const App: React.FC = () => {
                                                             ? "https://shopping-list-v2.netlify.app/"
                                                             : project.id === 5
                                                                 ? "https://moviezone-v1.netlify.app/"
-                                                                : "https://pokemon-battle-v2.netlify.app/"
+                                                                : project.id === 8
+                                                                    ? "https://pokemon-battle-v2.netlify.app/"
+                                                                    : "https://cinezone-v2.vercel.app/"
                                                 }
                                                 target="_blank"
                                                 rel="noopener noreferrer"
